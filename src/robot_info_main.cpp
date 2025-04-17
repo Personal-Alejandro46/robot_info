@@ -1,18 +1,16 @@
-#include "robot_info_class.hpp"
+#include "robot_info_class.cpp"
+#include "ros/init.h"
+#include "ros/rate.h"
 
-RobotInfo::RobotInfo(ros::NodeHandle *node_handle)
-{
-  nh_ = node_handle;
-  robot_info_pub_ = nh_.advertise<robotinfo_msgs::RobotInfo>("robot_info", 10);
+RobotInfo::RobotInfo(ros::NodeHandle *node_handle) {
   robot_description_ = "Mir100";
   serial_number_ = "567A359";
   ip_address_ = "169.254.5.180";
   firmware_version_ = "3.5.8";
 }
 
-void RobotInfo::publish_data()
-{
-  robotinfo_msgs::RobotInfo msg;
+void RobotInfo::publish_data() {
+  robotinfo_msgs::RobotInfo10Fields msg;
 
   msg.data_field_01 = "robot_description: " + robot_description_;
   msg.data_field_02 = "serial_number: " + serial_number_;
@@ -31,7 +29,14 @@ void RobotInfo::publish_data()
 int main(int argc, char **argv) {
   ros::init(argc, argv, "robot_info_node");
   ros::NodeHandle nh;
-  RobotInfo robot_info = RobotManagerBase(&nh);
-  robot_info.publish_data();
-  ros::spin();
+  RobotInfo robot_info = RobotInfo(&nh);
+
+  ros::Rate rate(1.0);
+  while (ros::ok()){
+    robot_info.publish_data();
+    ros::spinOnce();
+    rate.sleep(); 
+  }
+  
+  return 0;
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <ros/ros.h>
-#include <robotinfo_msgs/RobotInfo.h>
+#include <robotinfo_msgs/RobotInfo10Fields.h>
 
 class RobotInfo
 {
