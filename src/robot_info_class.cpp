@@ -1,4 +1,5 @@
 #include "robot_info/robot_info_class.h"
+#include "robot_info/hydraulic_system_monitor.h"
 #include <robotinfo_msgs/RobotInfo10Fields.h> 
 #include <ros/ros.h>
 
