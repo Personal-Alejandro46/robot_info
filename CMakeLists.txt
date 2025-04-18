@@ -23,8 +23,8 @@ add_executable(robot_info_node
 )
 
 add_executable(agv_robot_info_node 
-	src/robot_info_class.cpp
 	src/agv_robot_info_class.cpp
+	src/robot_info_class.cpp
 )
 
 add_dependencies(robot_info_node 
